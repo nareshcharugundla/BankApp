@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace BankApp
@@ -9,13 +10,21 @@ namespace BankApp
     /// </summary>
     class Account
     {
+        private static int LastAccountNumber = 0;
         #region Properties
-        public int AccountNumber { get; set; }
+        public int AccountNumber { get; private set; }
         public string AccountName { get; set; }
         public string AccountType { get; set; }
-        public decimal Balance { get; set; }
+        public decimal Balance { get; private set; }
         public string EmailAddress { get; set; }
         public DateTime CreatedDate { get; set; }
+        #endregion
+
+        #region
+        public Account()
+        {
+            AccountNumber = ++LastAccountNumber;
+        }
         #endregion
 
         #region Methods
