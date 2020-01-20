@@ -5,6 +5,13 @@ using System.Text;
 
 namespace BankApp
 {
+    public enum TypeOfAccounts
+    {
+        Checkings,
+        Savings,
+        CD,
+        Loan
+    }
     /// <summary>
     /// This Account class is to represent a bank account. It contains all the properties that a normal bank account has.
     /// </summary>
@@ -14,7 +21,7 @@ namespace BankApp
         #region Properties
         public int AccountNumber { get; private set; }
         public string AccountName { get; set; }
-        public string AccountType { get; set; }
+        public TypeOfAccounts AccountType { get; set; }
         public decimal Balance { get; private set; }
         public string EmailAddress { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -24,6 +31,7 @@ namespace BankApp
         public Account()
         {
             AccountNumber = ++LastAccountNumber;
+            CreatedDate = DateTime.UtcNow;
         }
         #endregion
 
