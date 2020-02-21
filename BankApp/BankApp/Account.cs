@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 
 namespace BankApp
 {
@@ -44,11 +45,19 @@ namespace BankApp
         /// <param name="Amount">Amount to deposit</param>
         public void Deposit(decimal Amount)
         {
+            if(Amount <= 0)
+            {
+                throw new ArgumentException("Amount", "Invalid Amount");
+            }
             Balance += Amount;
         }
 
         public decimal WithDraw(decimal Amount)
         {
+            if(Amount > Balance)
+            {
+                throw new ArgumentOutOfRangeException("Amount", "Insufficient funds");
+            }
             Balance -= Amount;
             return Balance;
         }

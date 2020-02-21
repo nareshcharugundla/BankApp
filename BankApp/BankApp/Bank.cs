@@ -40,7 +40,7 @@ namespace BankApp
             var account = accounts.SingleOrDefault(a => a.AccountNumber == accountNumber);
             if(account == null)
             {
-                return;
+                throw new ArgumentException("Invalid Account Number. Please try again!");
             }
             account.Deposit(amount);
             CreateTransaction(amount, accountNumber, TypeOfTransaction.Credit, "Bank Deposit");
@@ -51,7 +51,7 @@ namespace BankApp
             var account = accounts.SingleOrDefault(a => a.AccountNumber == accountNumber);
             if(account == null)
             {
-                return;
+                throw new ArgumentException("Invalid Account Number. Please try again!");
             }
             account.WithDraw(amount);
             CreateTransaction(amount, accountNumber, TypeOfTransaction.Debit, "Bank WithDrawl");

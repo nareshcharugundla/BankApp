@@ -51,21 +51,67 @@ namespace BankApp
                         break;
                     case "2":
                         PrintAllAccounts();
-                        Console.Write("Account Number: ");
-                        var accountNumber = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Amount to Deposit: ");
-                        amount = Convert.ToDecimal(Console.ReadLine());
-                        Bank.Deposit(accountNumber, amount);
-                        Console.WriteLine("Deposit Completed");
+                        try
+                        {
+                            Console.Write("Account Number: ");
+                            var accNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Amount to Deposit: ");
+                            amount = Convert.ToDecimal(Console.ReadLine());
+                            Bank.Deposit(accNumber, amount);
+                            Console.WriteLine("Deposit Completed");
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Either account number or amount is invalid. Please try again!");
+                        }
+                        catch (OverflowException)
+                        {
+                            Console.WriteLine("Either account number or amount is invalid. Please try again!");
+                        }
+                        catch (ArgumentOutOfRangeException aoe)
+                        {
+                            Console.WriteLine($"{aoe.Message}");
+                        }
+                        catch (ArgumentException ax)
+                        {
+                            Console.WriteLine($"{ax.Message}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"{ex.StackTrace}");
+                        }
                         break;
                     case "3":
                         PrintAllAccounts();
-                        Console.Write("Account Number: ");
-                        accountNumber = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Amount to Deposit: ");
-                        amount = Convert.ToDecimal(Console.ReadLine());
-                        Bank.Withdraw(accountNumber, amount);
-                        Console.WriteLine("Withdrawl Completed");
+                        try
+                        {
+                            Console.Write("Account Number: ");
+                            var aNumber = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Amount to Withdraw: ");
+                            amount = Convert.ToDecimal(Console.ReadLine());
+                            Bank.Withdraw(aNumber, amount);
+                            Console.WriteLine("Withdrawl Completed");
+                        }
+                        catch(FormatException)
+                        {
+                            Console.WriteLine("Either account number or amount is invalid. Please try again!");
+                        }
+                        catch(OverflowException)
+                        {
+                            Console.WriteLine("Either account number or amount is invalid. Please try again!");
+                        }
+                        catch(ArgumentOutOfRangeException aoe)
+                        {
+                            Console.WriteLine($"{aoe.Message}");
+                        }
+                        catch(ArgumentException ax)
+                        {
+                            Console.WriteLine($"{ax.Message}");
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine($"{ex.StackTrace}");
+                        }
                         break;
                     case "4":
                         PrintAllAccounts();
@@ -73,7 +119,7 @@ namespace BankApp
                     case "5":
                         PrintAllAccounts();
                         Console.Write("Account Number: ");
-                        accountNumber = Convert.ToInt32(Console.ReadLine());
+                        var accountNumber = Convert.ToInt32(Console.ReadLine());
                         var transactions = Bank.GetAllTransactionsByAccountNumber(accountNumber);
                         foreach (var t in transactions)
                         {
@@ -84,27 +130,26 @@ namespace BankApp
                         Console.WriteLine("Invalid Option. Please try again");
                         break;
                 }
-
             }
-
-
-            //var myAccount = Bank.CreateAccount("My Checking", "test@test.com", initialDeposit: 100);
-            //Console.WriteLine($"AN: {myAccount.AccountNumber}, AccountBalance: {myAccount.Balance}, CreatedDate: {myAccount.CreatedDate}, AccountType: {myAccount.AccountType}");
-
-            //var myAccount2 = Bank.CreateAccount("My Savings", "test1@test.com", TypeOfAccounts.Savings, 200);
-            //Console.WriteLine($"AN: {myAccount2.AccountNumber}, AccountBalance: {myAccount2.Balance}, CreatedDate: {myAccount2.CreatedDate}, AccountType: {myAccount2.AccountType}");
         }
 
         private static void PrintAllAccounts()
         {
             Console.Write("Email Address: ");
-            var emailAddress = Console.ReadLine();
-            var accounts = Bank.GetAllAccountsByEmail(emailAddress);
-            foreach (var a in accounts)
+            try
             {
-                Console.WriteLine($"AN: {a.AccountNumber}, AName: {a.AccountName}, " +
-                $"AccountBalance: {a.Balance:C}, CreatedDate: {a.CreatedDate}, " +
-                $"AccountType: {a.AccountType}, Email: {a.EmailAddress}");
+                var emailAddress = Console.ReadLine();
+                var accounts = Bank.GetAllAccountsByEmail(emailAddress);
+                foreach (var a in accounts)
+                {
+                    Console.WriteLine($"AN: {a.AccountNumber}, AName: {a.AccountName}, " +
+                    $"AccountBalance: {a.Balance:C}, CreatedDate: {a.CreatedDate}, " +
+                    $"AccountType: {a.AccountType}, Email: {a.EmailAddress}");
+                }
+            }
+            catch(FormatException)
+            {
+                Console.WriteLine("Invalid Email. Please try again");
             }
         }
     }
