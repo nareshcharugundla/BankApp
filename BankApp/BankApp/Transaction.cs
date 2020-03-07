@@ -19,9 +19,11 @@ namespace BankApp
         public decimal Amount { get; set; }
         public int AccountNumber { get; set; }
 
+        public Account Account { get; set; }
+
         public Transaction()
         {
-            TransactionID = ++LastTransactionNumber;
+            TransactionDate = DateTime.UtcNow;
         }
     }
 }

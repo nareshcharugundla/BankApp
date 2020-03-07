@@ -18,8 +18,6 @@ namespace BankApp
     /// </summary>
     class Account
     {
-        private static int LastAccountNumber = 0;
-
         #region Properties
         public int AccountNumber { get; private set; }
         public string AccountName { get; set; }
@@ -32,7 +30,6 @@ namespace BankApp
         #region
         public Account()
         {
-            AccountNumber = ++LastAccountNumber;
             CreatedDate = DateTime.UtcNow;
         }
         #endregion
