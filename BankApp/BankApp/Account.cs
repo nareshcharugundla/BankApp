@@ -16,7 +16,7 @@ namespace BankApp
     /// <summary>
     /// This Account class is to represent a bank account. It contains all the properties that a normal bank account has.
     /// </summary>
-    class Account
+    public class Account
     {
         #region Properties
         public int AccountNumber { get; private set; }
